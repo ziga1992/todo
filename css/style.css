@@ -51,27 +51,34 @@ nav {
     top: 70px;
     float: left;
     height: 100%;
-    width: 200px;
+    width: 45px;
     border-right: 1px solid #333333;
-
+}
+nav:hover {
+    width: 200px;
 }
 .new-bar {
     height: 50px;
     background: #111111;
-    display: flex;
     color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 .new-button {
     height: 100%;
-    flex: 1;
     font-size: 1.5em;
     line-height: 50px;
     text-align: center;
     box-sizing: border-box;
     cursor: pointer;
+    display: inline-block;
 }
 .new-button:hover {
     color: #2980b9;
+}
+.new-button:first-child {
+    width: 45px;
 }
 .slider {
     width: 100%;
