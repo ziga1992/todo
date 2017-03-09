@@ -1,0 +1,130 @@
+.checkbox.done label {
+    text-decoration: line-through;
+    color: #888;
+}
+.checkbox input[type="checkbox"] {
+    margin-left: 0px;
+}
+#todoTitle,
+#todoDescription,
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+#todoDescription {
+    resize: vertical;
+}
+#tag p {
+    padding-left: 5px;
+}
+html {
+    height: 100%;
+}
+body {
+    background: url("../img/ozadje.png") no-repeat 98% 95% #111111;
+    position: relative;
+    height: 100%;
+}
+header {
+    background: #2980b9;
+    height: 70px;
+    border-bottom: 1px solid #333333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.logo {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 70px;
+    padding-right: 20px;
+    float: right;
+}
+.logo span {
+    color: #333333;
+}
+nav {
+    background: #222222;
+    position: fixed;
+    top: 70px;
+    float: left;
+    height: 100%;
+    width: 200px;
+    border-right: 1px solid #333333;
+
+}
+.new-bar {
+    height: 50px;
+    background: #111111;
+    display: flex;
+    color: white;
+}
+.new-button {
+    height: 100%;
+    flex: 1;
+    font-size: 1.5em;
+    line-height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.new-button:hover {
+    color: #2980b9;
+}
+.slider {
+    width: 100%;
+    color: red;
+    height: 0px;
+    transition: height 1s linear;
+}
+.slider.open {
+    height: 700px;
+}
+.main-menu {
+    border-bottom: 1px solid #333333;
+}
+.main-menu i {
+    padding: 0 15px;
+    width: 45px;
+    font-size: 1.5em;
+}
+.menu {
+    color: white;
+    height: 45px;
+    line-height: 45px;
+    cursor: pointer;
+}
+.menu.current {
+    background: #111111;
+    border-left: 3px solid #2980b9;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+}
+.menu.current i {
+    margin-left: -3px;
+}
+.todo-picture i {
+    color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 0 30px;
+    color: #222222;
+    font-size: 300px;
+}
+#bolt {
+    padding-left: 20px;
+}
+#personal {
+    color: #2980b9;
+}
+#work {
+    color: #2ecc71;
+}
+#shopping {
+    color: #e67e22;
+}
+ 
+

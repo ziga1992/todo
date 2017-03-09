@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do List</title>
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/checkbox.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	<style>
+		.container {
+			padding-left: 200px;
+			padding-top: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="logo">TO<span>.do</span></div>
+	</header>
+	<nav>
+		<div class="new-bar">
+			<div class="new-button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+			<div class="new-button"><i class="fa fa-pencil" aria-hidden="true"></i></i></div>
+			<div class="new-button"></div>
+			<div class="new-button"></div>
+		</div>
+		<div class="slider"> 
+
+		</div>
+		<div class="menu-sliding">
+			<div class="main-menu">
+				<div class="menu menu-today"><i class="fa fa-clock-o" aria-hidden="true"></i>today</div>
+				<div class="menu menu-week"><i class="fa fa-calendar" aria-hidden="true"></i>week</div>
+				<div class="menu menu-all current"><i class="fa fa-list" aria-hidden="true"></i>all</div>
+				<div class="menu menu-completed"><i class="fa fa-check" aria-hidden="true"></i>completed</div>
+				<div class="menu menu-favorite"><i class="fa fa-star" aria-hidden="true"></i>favorite</div>
+				<div class="menu menu-no-due-date"><i class="fa fa-calendar-o" aria-hidden="true"></i>no due date</div>
+				<div class="menu menu-scheduled"><i class="fa fa-bolt" id="bolt" aria-hidden="true"></i>scheduled</div>
+			</div>
+			<div class="main-menu">
+				<div class="menu menu-personal"><i class="fa fa-user" id="personal" aria-hidden="true"></i>personal</div>
+				<div class="menu menu-work"><i class="fa fa-building" id="work" aria-hidden="true"></i>work</div>
+				<div class="menu menu-shopping"><i class="fa fa-shopping-cart" id="shopping" aria-hidden="true"></i>shopping</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h1 class="panel-title">Opravila:</h1>
+			</div>
+			<div class="panel-body">
+				<div class="row" id="todo"></div>
+				<br />
+				<div class="row">
+					<div class="col-lg-6">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTodo">Dodaj</button>
+						<button type="button" class="btn btn-info" data-toggle="modal" data-target="#priority">Prioritete</button>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#tags">Oznake</button>
+					</div>
+					
+					<div class="col-lg-6 text-right">
+						<button type="button" class="btn btn-danger" id="remove">Odstrani</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- MODALS -->
+	<div class="modal fade" id="addTodo" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Dodaj nov opravek</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="input-group">
+								<input type="text" class="form-control" id="todoTitle" placeholder="Opravek">
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="input-group">
+								<textarea type="text" class="form-control" id="todoDescription" rows="5" placeholder="Opis"></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="input-group date date-datepicker">
+								<input type="text" class="form-control" id="addDate" placeholder="Datum"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							</div>
+						</div>
+						<div class="col-lg-12">
+							<div class="input-group">
+								<label>Prioriteta:</label>
+								<br />
+								<select id="choose">
+									<option value="-1">Brez</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+					<button type="button" id="add" class="btn btn-primary">Dodaj</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- Priority -->
+	<div class="modal fade" id="priority" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Prioritete</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row" id="prio"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- Tags -->
+	<div class="modal fade" id="tags" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Oznake</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row" id="tag"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/script.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+</body>
+
+</html>
