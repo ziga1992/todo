@@ -2,29 +2,36 @@
     text-decoration: line-through;
     color: #888;
 }
+
 .checkbox input[type="checkbox"] {
     margin-left: 0px;
 }
+
 #todoTitle,
 #todoDescription,
 .input-group {
     width: 100%;
     margin-bottom: 15px;
 }
+
 #todoDescription {
     resize: vertical;
 }
+
 #tag p {
     padding-left: 5px;
 }
+
 html {
     height: 100%;
 }
+
 body {
     background: url("../img/ozadje.png") no-repeat 98% 95% #111111;
     position: relative;
     height: 100%;
 }
+
 header {
     background: #2980b9;
     height: 70px;
@@ -34,6 +41,7 @@ header {
     left: 0;
     width: 100%;
 }
+
 .logo {
     color: white;
     font-size: 40px;
@@ -42,21 +50,28 @@ header {
     padding-right: 20px;
     float: right;
 }
+
 .logo span {
     color: #333333;
 }
+
 nav {
     background: #222222;
     position: fixed;
     top: 70px;
     float: left;
     height: 100%;
-    width: 45px;
+    width: 50px;
     border-right: 1px solid #333333;
 }
+
 nav:hover {
     width: 200px;
 }
+nav:hover .new-bar .new-button{
+    display: block
+}
+
 .new-bar {
     height: 50px;
     background: #111111;
@@ -65,6 +80,7 @@ nav:hover {
     padding: 0;
     margin: 0;
 }
+
 .new-button {
     height: 100%;
     font-size: 1.5em;
@@ -73,45 +89,63 @@ nav:hover {
     box-sizing: border-box;
     cursor: pointer;
     display: inline-block;
+    vertical-align: top;
+     width: 50px;
+     display:none;
 }
+
+.new-button:first-child {
+    display: inline-block;
+}
+
+nav:hover .new-bar .new-button {
+    display: inline-block
+}
+
 .new-button:hover {
     color: #2980b9;
 }
-.new-button:first-child {
-    width: 45px;
-}
+
 .slider {
     width: 100%;
     color: red;
     height: 0px;
     transition: height 1s linear;
 }
+
 .slider.open {
     height: 700px;
 }
+
 .main-menu {
     border-bottom: 1px solid #333333;
+   
 }
+
 .main-menu i {
     padding: 0 15px;
-    width: 45px;
+    width: 50px;
     font-size: 1.5em;
 }
+
 .menu {
     color: white;
     height: 45px;
     line-height: 45px;
     cursor: pointer;
 }
+
 .menu.current {
     background: #111111;
     border-left: 3px solid #2980b9;
     border-top: 1px solid #333333;
     border-bottom: 1px solid #333333;
 }
+
 .menu.current i {
     margin-left: -3px;
 }
+
 .todo-picture i {
     color: white;
     position: fixed;
@@ -121,15 +155,19 @@ nav:hover {
     color: #222222;
     font-size: 300px;
 }
+
 #bolt {
     padding-left: 20px;
 }
+
 #personal {
     color: #2980b9;
 }
+
 #work {
     color: #2ecc71;
 }
+
 #shopping {
     color: #e67e22;
 }
