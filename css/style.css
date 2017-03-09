@@ -27,7 +27,7 @@ html {
 }
 
 body {
-    background: url("../img/ozadje.png") no-repeat 98% 95% #111111;
+    background: url("../img/ozadje.png") fixed no-repeat 98% 95% #111111;
     position: relative;
     height: 100%;
 }
@@ -35,11 +35,11 @@ body {
 header {
     background: #2980b9;
     height: 70px;
-    border-bottom: 1px solid #333333;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 .logo {
@@ -58,18 +58,20 @@ header {
 nav {
     background: #222222;
     position: fixed;
-    top: 70px;
+    top: 120px;
     float: left;
     height: 100%;
-    width: 50px;
+    width: 200px;
     border-right: 1px solid #333333;
+    /*transition: width 0.5s;*/
 }
 
-nav:hover {
+.top-bar {
+    position: fixed;
+    top: 70px;
+    height: 50px;
     width: 200px;
-}
-nav:hover .new-bar .new-button{
-    display: block
+    float: left;
 }
 
 .new-bar {
@@ -79,6 +81,8 @@ nav:hover .new-bar .new-button{
     list-style: none;
     padding: 0;
     margin: 0;
+    border-bottom: 1px solid #333333;
+    border-right: 1px solid #333333;
 }
 
 .new-button {
@@ -90,16 +94,7 @@ nav:hover .new-bar .new-button{
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
-     width: 50px;
-     display:none;
-}
-
-.new-button:first-child {
-    display: inline-block;
-}
-
-nav:hover .new-bar .new-button {
-    display: inline-block
+    width: 50px;
 }
 
 .new-button:hover {
@@ -119,13 +114,17 @@ nav:hover .new-bar .new-button {
 
 .main-menu {
     border-bottom: 1px solid #333333;
-   
 }
 
-.main-menu i {
+.menu i {
     padding: 0 15px;
     width: 50px;
     font-size: 1.5em;
+    float: left;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .menu {
@@ -133,6 +132,11 @@ nav:hover .new-bar .new-button {
     height: 45px;
     line-height: 45px;
     cursor: pointer;
+    clear: both;
+}
+
+.menu:hover {
+    background: #111111;
 }
 
 .menu.current {
@@ -170,4 +174,89 @@ nav:hover .new-bar .new-button {
 
 #shopping {
     color: #e67e22;
+}
+
+/* CONTENT */
+#content {
+    position: relative;
+    top: 120px;
+    left: 200px;
+    width: calc(100% - 200px);
+    overflow-y: scroll;
+}
+
+/* MODAL */
+.modal-content {
+    background: #333333;
+    color: white;
+}
+
+/* CALENDAR */
+.calendar {
+    height: 50px;
+    background: #111111;
+    border-bottom: 1px solid #333333;
+    color: white;
+    float: left;
+    position: fixed;
+    top: 70px;
+    width: calc(100% - 200px);
+    z-index: 1000;
+}
+
+.day {
+    height: 50px;
+    border-right: 1px solid #333333;
+    padding-left: 5px;
+}
+
+.upper-line {
+    color: #555555;
+    font-weight: 300;
+}
+
+/* TASKS */
+.main-content {
+    padding: 70px;
+}
+
+.column {
+    padding: 0px;
+}
+
+.task {
+    background: #333333;
+    min-height: 100px;
+    width: calc(100% - 10px);
+    margin: 5px auto 0 auto;
+    padding: 10px;
+    color: white;
+}
+
+input[type="checkbox"] + label {
+    padding-left: 15px;
+}
+
+input[type="checkbox"] + label:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    position: absolute;
+    left: 0px;
+}
+
+input[type="checkbox"]:checked + label:after {
+    background: url("../img/check_mark.svg");
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    content: "";
+    width: 16px;
+    height: 16px;
+}
+
+.task-date {
+    padding-left: 15px;
+    color: #555555;
 }

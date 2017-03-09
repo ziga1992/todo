@@ -7,7 +7,7 @@ $(document).ready(function() {
         var todoDescription = $("#todoDescription").val();
         var todoDate = moment($("#todoDate").val()).format();
         var todoPriority = $("#choose").val();
-        if(todoPrority == -1) {
+        if(todoPriority == -1) {
             todoPriority = null;
         }
        console.log(todoDate);
@@ -100,19 +100,11 @@ function addPriorityToSelect(prioriteta) {
 }
 // Funcija, ki doda opravek
 function addTodo(opravek) {
-    var done = "";
-    if(opravek.checked == "true") {
-        done = "done";
-    }
-    var priorityNone= "";
-    if(opravek.priority.hasOwnProperty('name')) {
-        priorityNone = "(" + opravek.priority.name + ")";
-    }
-    var todo = $('<div class="checkbox ' + done + ' col-lg-12" data-id="' + opravek.id + '"><input type="checkbox" class="delete"><label>' + opravek.title + ' ' +  priorityNone + '</label></div>');
-    $("#todo").append(todo);
+    var todo = generateTodoHtml(opravek);
+    $(".column").append(todo);
     todo.find("label").click(function() {
         console.log($(this));
-        var ele = $(this).parents(".checkbox");
+        var ele = $(this).parents(".task");
         ele.toggleClass("done");
         var id = ele.data("id");
         var input = ele.hasClass("done");
@@ -135,4 +127,26 @@ function addTodo(opravek) {
             }
         });
     });
+}
+function generateTodoHtml(opravek) {
+    var done = "";
+    if(opravek.checked == "true") {
+        done = "checked";
+    }
+    var priorityNone= "";
+    if(opravek.priority.hasOwnProperty('name')) {
+        priorityNone = "(" + opravek.priority.name + ")";
+        if(opravek.priority.name == "high") {
+            priorityNone = "#e74c3c";
+        }
+        if(opravek.priority.name == "medium") {
+            priorityNone = "#e67e22";
+        }
+        if(opravek.priority.name == "low") {
+            priorityNone = "#f1c40f";
+        }
+    }
+    var html = '<div class="task" data-id="' + opravek.id + '"><div class="col-xs-12"><input id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
+
+    return $(html);
 }

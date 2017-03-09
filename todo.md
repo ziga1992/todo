@@ -1,2 +1,5 @@
 # TODOS
-- nav-bar skoci po :hoverju 1px dol
+- shopping ikona zamik
+- nav-bar spodnji del menija
+- moment nastimaj locale
+- nav-bar popravi smeti
