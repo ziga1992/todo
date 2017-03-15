@@ -39,9 +39,8 @@ $(document).ready(function() {
         autoclose: true
     });
     $("#remove").click(function() {
-        var remove = $(".delete:checkbox:checked").parents(".checkbox").data("id");
-        $( ".delete:checkbox:checked" ).each(function( index ) {
-            var id = $(this).parents(".checkbox").data("id");
+        $( ".todo-checkbox:checkbox:checked" ).each(function( index ) {
+            var id = $(this).parents(".task").data("id");
             var t = $(this);
             $.ajax({
                 url : "http://localhost:52001/todos",
@@ -50,7 +49,7 @@ $(document).ready(function() {
                 success: function(data, textStatus, jqXHR)
                 {
                     //data - response from server
-                    t.parents(".checkbox").remove();
+                    t.parents(".task").remove();
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
@@ -146,7 +145,7 @@ function generateTodoHtml(opravek) {
             priorityNone = "#f1c40f";
         }
     }
-    var html = '<div class="task" data-id="' + opravek.id + '"><div class="col-xs-12"><input id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
+    var html = '<div class="task" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
 
     return $(html);
 }

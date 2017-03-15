@@ -94,7 +94,8 @@ nav {
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
-    width: 50px;
+    width: 49px;
+    float: left;
 }
 
 .new-button:hover {
