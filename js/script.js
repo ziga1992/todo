@@ -18,7 +18,7 @@ $(document).ready(function() {
             priority_id: todoPriority
         };
         $.ajax({
-            url : "http://localhost:52001/todos",
+            url : "http://86.61.121.233:52001/todos",
             type: "POST",
             data : opravek,
             success: function(data, textStatus, jqXHR)
@@ -43,7 +43,7 @@ $(document).ready(function() {
             var id = $(this).parents(".task").data("id");
             var t = $(this);
             $.ajax({
-                url : "http://localhost:52001/todos",
+                url : "http://86.61.121.233:52001/todos",
                 type: "DELETE",
                 data : {id: id},
                 success: function(data, textStatus, jqXHR)
@@ -58,14 +58,14 @@ $(document).ready(function() {
             });
         });
     });
-    $.get("http://localhost:52001/todos", function(data) {
+    $.get("http://86.61.121.233:52001/todos", function(data) {
         todos = data;
         console.log(todos);
         for(var todo of todos) {
             addTodo(todo);
         }
     });
-    $.get("http://localhost:52001/priorities", function(data) {
+    $.get("http://86.61.121.233:52001/priorities", function(data) {
         prios = data;
         console.log(prios);
         for(var prio of prios) {
@@ -73,7 +73,7 @@ $(document).ready(function() {
             addPriorityToSelect(prio);
         }
     });
-    $.get("http://localhost:52001/tags", function(data) {
+    $.get("http://86.61.121.233:52001/tags", function(data) {
         tags = data;
         console.log(tags);
         for(var tag of tags) {
