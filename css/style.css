@@ -113,6 +113,10 @@ nav {
     height: 700px;
 }
 
+.menu-sliding {
+    overflow: scroll;
+}
+
 .main-menu {
     border-bottom: 1px solid #333333;
 }
@@ -148,6 +152,28 @@ nav {
 }
 
 .menu.current i {
+    margin-left: -3px;
+}
+
+.menu.current-priority {
+    background: #111111;
+    border-left: 3px solid #2980b9;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+}
+
+.menu.current-priority i {
+    margin-left: -3px;
+}
+
+.menu.current-tag {
+    background: #111111;
+    border-left: 3px solid #2980b9;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+}
+
+.menu.current-tag i {
     margin-left: -3px;
 }
 

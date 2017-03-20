@@ -38,6 +38,36 @@ $(document).ready(function() {
         format: "dd.mm.yyyy",
         autoclose: true
     });
+    $(".menu-high").click(function() {
+        if($(this).hasClass("current-priority")) {
+            $(this).removeClass("current-priority");
+            showPriorities("all");
+        } else {
+            $(".current-priority").removeClass("current-priority");
+            $(this).addClass("current-priority");
+            showPriorities("high");
+        }
+    });
+    $(".menu-medium").click(function() {
+         if($(this).hasClass("current-priority")) {
+            $(this).removeClass("current-priority")
+            showPriorities("all");
+        } else {
+            $(".current-priority").removeClass("current-priority");
+            $(this).addClass("current-priority");
+            showPriorities("med");
+        }
+    });
+    $(".menu-low").click(function() {
+         if($(this).hasClass("current-priority")) {
+            $(this).removeClass("current-priority")
+            showPriorities("all");
+        } else {
+            $(".current-priority").removeClass("current-priority");
+            $(this).addClass("current-priority");
+            showPriorities("low");
+        }
+    });
     $("#remove").click(function() {
         $( ".todo-checkbox:checkbox:checked" ).each(function( index ) {
             var id = $(this).parents(".task").data("id");
@@ -139,14 +169,27 @@ function generateTodoHtml(opravek) {
         if(opravek.priority.name == "high") {
             priorityNone = "#e74c3c";
         }
-        if(opravek.priority.name == "medium") {
+        if(opravek.priority.name == "med") {
             priorityNone = "#e67e22";
         }
         if(opravek.priority.name == "low") {
             priorityNone = "#f1c40f";
         }
     }
-    var html = '<div class="task" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
+    var html = '<div class="task" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
 
     return $(html);
+}
+function showPriorities(priority) {
+    $(".task").each(function() {
+        if(priority == "all") {
+            $(this).show();
+            return 0;
+        }
+        if($(this).data("priority") == priority) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        };
+    });
 }
