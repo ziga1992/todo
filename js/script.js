@@ -100,7 +100,8 @@ function addPriorityToSelect(prioriteta) {
 // Funcija, ki doda opravek
 function addTodo(opravek) {
     var todo = generateTodoHtml(opravek);
-    $(".column").append(todo);
+    var date = moment(opravek.finish_date).format("YYYY-MM-DD");
+    $(".column[data-date='" + date +"']").append(todo);
     todo.find("label").click(function() {
         console.log($(this));
         var ele = $(this).parents(".task");
