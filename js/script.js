@@ -2,8 +2,8 @@ $(document).ready(function() {
     var todos = [];
     var prios = [];
     var tags = [];
-    var host = "http://localhost:52001/";
-    //var host = "http://86.61.121.233:52001/";
+    // var host = "http://localhost:52001/";
+    var host = "http://86.61.121.233:52001/";
 
     $("#add").click(function() {
         var todoTitle = $("#todoTitle").val();
