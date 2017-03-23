@@ -7,6 +7,10 @@
     margin-left: 0px;
 }
 
+::-webkit-scrollbar {
+display: none;
+}
+
 #todoTitle,
 #todoDescription,
 .input-group {
@@ -64,7 +68,7 @@ nav {
     width: 200px;
     border-right: 1px solid #333333;
     /*transition: width 0.5s;*/
-    overflow: scroll;
+    overflow-y: scroll;
     height: calc(100% - 170px);
 }
 
@@ -128,12 +132,12 @@ nav {
     height: 700px;
 }
 
-.menu-sliding {
-    overflow: scroll;
-}
-
 .main-menu {
     border-bottom: 1px solid #333333;
+}
+
+.prio-menu {
+    border-bottom: none;
 }
 
 .menu i {
@@ -257,8 +261,6 @@ nav {
     top: 70px;
     width: calc(100% - 200px);
     z-index: 1000;
-    overflow: auto;
-    white-space: nowrap;
 }
 
 .day {
@@ -318,6 +320,6 @@ input[type="checkbox"]:checked + label:after {
     color: #555555;
 }
 
-#choose {
+.choose {
     color: black;
 }

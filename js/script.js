@@ -2,10 +2,15 @@ $(document).ready(function() {
     var todos = [];
     var prios = [];
     var tags = [];
+    var host = "http://localhost:52001/";
+    //var host = "http://86.61.121.233:52001/";
+
     $("#add").click(function() {
         var todoTitle = $("#todoTitle").val();
         var todoDescription = $("#todoDescription").val();
-        var todoDate = moment($("#todoDate").val()).format();
+        var date = $("#todoDate").val();
+        date = moment(date, "YYYY/MM/DD").format();
+        var todoDate = date;
         var todoPriority = $("#choose").val();
         if(todoPriority == -1) {
             todoPriority = null;
@@ -18,7 +23,7 @@ $(document).ready(function() {
             priority_id: todoPriority
         };
         $.ajax({
-            url : "http://86.61.121.233:52001/todos",
+            url : host + "todos",
             type: "POST",
             data : opravek,
             success: function(data, textStatus, jqXHR)
@@ -35,37 +40,64 @@ $(document).ready(function() {
         });
     });
     $('.date-datepicker').datepicker({
-        format: "dd.mm.yyyy",
+        format: "yyyy/mm/dd",
         autoclose: true
     });
     $(".menu-high").click(function() {
         if($(this).hasClass("current-priority")) {
             $(this).removeClass("current-priority");
-            showPriorities("all");
+            filterTodos();
         } else {
             $(".current-priority").removeClass("current-priority");
             $(this).addClass("current-priority");
-            showPriorities("high");
+            filterTodos();
         }
     });
     $(".menu-medium").click(function() {
          if($(this).hasClass("current-priority")) {
             $(this).removeClass("current-priority")
-            showPriorities("all");
+            filterTodos();
         } else {
             $(".current-priority").removeClass("current-priority");
             $(this).addClass("current-priority");
-            showPriorities("med");
+            filterTodos();
         }
     });
     $(".menu-low").click(function() {
          if($(this).hasClass("current-priority")) {
             $(this).removeClass("current-priority")
-            showPriorities("all");
+            filterTodos();
         } else {
             $(".current-priority").removeClass("current-priority");
             $(this).addClass("current-priority");
-            showPriorities("low");
+            filterTodos();
+        }
+    });
+    $(".menu-personal").click(function() {
+         if($(this).hasClass("current-tag")) {
+            $(this).removeClass("current-tag")
+            filterTodos();
+        } else {
+            $(this).addClass("current-tag");
+            filterTodos();
+        }
+    });
+    $(".menu-work").click(function() {
+         if($(this).hasClass("current-tag")) {
+            $(this).removeClass("current-tag")
+            filterTodos();
+        } else {
+            $(this).addClass("current-tag");
+            filterTodos();
+        }
+    });
+    $(".menu-shopping").click(function() {
+         if($(this).hasClass("current-tag")) {
+            $(this).removeClass("current-tag")
+            filterTodos();
+        } else {
+            $(this).addClass("current-tag");
+            filterTodos();
         }
     });
     $("#remove").click(function() {
@@ -88,14 +120,14 @@ $(document).ready(function() {
             });
         });
     });
-    $.get("http://86.61.121.233:52001/todos", function(data) {
+    $.get( host + "todos", function(data) {
         todos = data;
         console.log(todos);
         for(var todo of todos) {
             addTodo(todo);
         }
     });
-    $.get("http://86.61.121.233:52001/priorities", function(data) {
+    $.get( host + "priorities", function(data) {
         prios = data;
         console.log(prios);
         for(var prio of prios) {
@@ -103,7 +135,7 @@ $(document).ready(function() {
             addPriorityToSelect(prio);
         }
     });
-    $.get("http://86.61.121.233:52001/tags", function(data) {
+    $.get( host + "tags", function(data) {
         tags = data;
         console.log(tags);
         for(var tag of tags) {
@@ -125,7 +157,7 @@ function addPriority(prioriteta) {
 // Funkcija, ki doda prioriteto v opravek
 function addPriorityToSelect(prioriteta) {
     var prio = $('<option value="' + prioriteta.id + '">' + prioriteta.name + '</option>')
-    $("#choose").append(prio);
+    $("#choose-prio").append(prio);
 }
 // Funcija, ki doda opravek
 function addTodo(opravek) {
@@ -140,7 +172,7 @@ function addTodo(opravek) {
         var input = ele.hasClass("done");
         console.log(input);
         $.ajax({
-            url : "http://localhost:52001/todo/check",
+            url : host + "todo/check",
             type: "POST",
             data : {
                 todo_id: id,
@@ -163,33 +195,53 @@ function generateTodoHtml(opravek) {
     if(opravek.checked == "true") {
         done = "checked";
     }
-    var priorityNone= "";
-    if(opravek.priority.hasOwnProperty('name')) {
-        priorityNone = "(" + opravek.priority.name + ")";
-        if(opravek.priority.name == "high") {
-            priorityNone = "#e74c3c";
-        }
-        if(opravek.priority.name == "med") {
-            priorityNone = "#e67e22";
-        }
-        if(opravek.priority.name == "low") {
-            priorityNone = "#f1c40f";
-        }
+    var tag = "";
+    if(opravek.tags.length != 0) {
+        tag = opravek.tags[0].name;
     }
-    var html = '<div class="task" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + priorityNone + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
+    var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
 
     return $(html);
 }
 function showPriorities(priority) {
     $(".task").each(function() {
-        if(priority == "all") {
-            $(this).show();
-            return 0;
-        }
         if($(this).data("priority") == priority) {
             $(this).show();
         } else {
             $(this).hide();
         };
+    });
+}
+function filterTodos() {
+    var selected_priority = $(".current-priority").find("div").text();
+    var selected_tags = [];
+    $(".current-tag").each(function(i) {
+        var t = $(this);
+        // save text into variable
+        var text = t.find("div").text();
+        // push to selected_tag
+        selected_tags.push(text);
+    });
+    if((selected_tags.length == 0) && (selected_priority.length == 0)) {
+        $(".task").show();
+        return;
+    }
+    $(".task").each(function() {
+        if($.inArray($(this).data("tag"), selected_tags) != -1) {
+            $(this).show();
+            if(selected_priority.length > 0) {
+                if($(this).data("priority") == selected_priority) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            }
+        } else if(($(this).data("priority") == selected_priority) && (selected_tags.length == 0)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+       
+       
     });
 }
