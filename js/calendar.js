@@ -23,6 +23,7 @@ $(document).ready(function() {
         days.push(parsed_date);
     }
     insertDatesHtml(days);
+    $(".column").first().append(`<div class="task" data-tag="" data-priority="high" data-id="null"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox" type="checkbox" hidden=""><label for="checkbox" style="color: #e74c3c;">TEST</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;29.03.2017</small></div></div></div>`);
     console.log(days);
 });
 

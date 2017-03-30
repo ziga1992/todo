@@ -2,8 +2,8 @@ $(document).ready(function() {
     var todos = [];
     var prios = [];
     var tags = [];
-    var host = "http://localhost:52001/";
-    // var host = "http://86.61.121.233:52001/";
+    // var host = "http://localhost:52001/";
+    var host = "http://89.142.196.244:52001/";
 
     $("#add").click(function() {
         var todoTitle = $("#todoTitle").val();
@@ -187,10 +187,14 @@ function generateTodoHtml(opravek) {
         done = "checked";
     }
     var tag = "";
+    var tags = "";
     if(opravek.tags.length != 0) {
         tag = opravek.tags[0].name;
+        for(var t of opravek.tags) {
+            tags += '<li data-tag="' + t.name + '" class="task-tag" style="background: ' + t.color + '"><span>' + t.name + '</span></li>'
+        }
     }
-    var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div></div>';
+    var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div><ul class="task-tags">' + tags + '</ul></div>';
 
     return $(html);
 }
