@@ -186,12 +186,12 @@ function generateTodoHtml(opravek) {
     if(opravek.checked == "true") {
         done = "checked";
     }
-    var tag = "";
+    var tag = [];
     var tags = "";
     if(opravek.tags.length != 0) {
-        tag = opravek.tags[0].name;
         for(var t of opravek.tags) {
-            tags += '<li data-tag="' + t.name + '" class="task-tag" style="background: ' + t.color + '"><span>' + t.name + '</span></li>'
+            tags += '<li data-tag="' + t.name + '" class="task-tag" style="background: ' + t.color + '"><span>' + t.name + '</span></li>';
+            tag.push(t.name);
         }
     }
     var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div><ul class="task-tags">' + tags + '</ul></div>';
@@ -222,7 +222,9 @@ function filterTodos() {
         return;
     }
     $(".task").each(function() {
-        if($.inArray($(this).data("tag"), selected_tags) != -1) {
+        var this_tags = $(this).data("tag").split(",");
+        var intersect = $(this_tags).filter(selected_tags);
+        if(intersect.length != 0) {
             $(this).show();
             if(selected_priority.length > 0) {
                 if($(this).data("priority") == selected_priority) {
