@@ -222,16 +222,7 @@ nav {
     padding-left: 20px;
 }
 
-#personal {
-    color: #2980b9;
-}
-
-#work {
-    color: #2ecc71;
-}
-
-#shopping {
-    color: #8e44ad;
+.fa-shopping-cart {
     position: relative;
     left: -3px;
 }
