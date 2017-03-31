@@ -1,9 +1,9 @@
+// var host = "http://localhost:52001/";
+var host = "http://89.142.196.244:52001/";
 $(document).ready(function() {
     var todos = [];
     var prios = [];
     var tags = [];
-    // var host = "http://localhost:52001/";
-    var host = "http://89.142.196.244:52001/";
     // Funcija, ki doda opravek
     $("#add").click(function() {
         var todoTitle = $("#todoTitle").val();
@@ -29,7 +29,7 @@ $(document).ready(function() {
             {
                 //data - response from server
                 addTodo(data);
-                $('#addTodo').modal('toggle');
+                $(".slider-new").removeClass("open");
                 $("#todoTitle, #todoDescription, #todoDate").val("");
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -39,30 +39,14 @@ $(document).ready(function() {
         });
     });
     // Date-picker
-    $('.date-datepicker').datepicker({
+    $('#todoDate').datepicker({
         format: "yyyy/mm/dd",
         autoclose: true
     });
-    // Funkcija za odstranitev opravka
+    // Funkcija za brisanje
     $("#remove").click(function() {
-        $( ".todo-checkbox:checkbox:checked" ).each(function( index ) {
-            var id = $(this).parents(".task").data("id");
-            var t = $(this);
-            $.ajax({
-                url : host + "todos",
-                type: "DELETE",
-                data : {id: id},
-                success: function(data, textStatus, jqXHR)
-                {
-                    //data - response from server
-                    t.parents(".task").remove();
-                },
-                error: function (jqXHR, textStatus, errorThrown)
-                {
-            
-                }
-            });
-        });
+        $(this).toggleClass("trash-delete");
+        $(".delete-task").toggle();
     });
     // BackEnd pull
     $.get( host + "todos", function(data) {
@@ -86,6 +70,14 @@ $(document).ready(function() {
         for(var tag of tags) {
             addTagMenu(tag);
         }
+    });
+    // Funkcija klika, ki odpre nov opravek
+    $("#addTodo").click(function() {
+        $(".slider-new").toggleClass("open");
+    });
+    // Funkcija klika, ki zapre nov opravek
+    $(".btn-task-close").click(function () {
+        $(".slider-new").removeClass("open");
     });
 });
 
@@ -119,6 +111,24 @@ function addTodo(opravek) {
             error: function (jqXHR, textStatus, errorThrown)
             {
                 console.log(errorThrown);
+            }
+        });
+    });
+    todo.find(".delete-task").click(function() {
+        var id = $(this).parents(".task").data("id");
+        var t = $(this);
+        $.ajax({
+            url : host + "todos",
+            type: "DELETE",
+            data : {id: id},
+            success: function(data, textStatus, jqXHR)
+            {
+                //data - response from server
+                t.parents(".task").remove();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+        
             }
         });
     });
@@ -164,7 +174,8 @@ function generateTodoHtml(opravek) {
             tag.push(t.name);
         }
     }
-    var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div><ul class="task-tags">' + tags + '</ul></div>';
+    var delete_task = '<div class="delete-task"><i class="fa fa-times" aria-hidden="true"></i></div>';
+    var html = '<div class="task" data-tag="' + tag + '" data-priority="' + opravek.priority.name + '" data-id="' + opravek.id + '"><div class="col-xs-12"><input class="todo-checkbox" id="checkbox' + opravek.id + '" type="checkbox" ' + done + ' hidden><label for="checkbox' + opravek.id + '" style="color: ' + opravek.priority.color + ';">' + opravek.title + '</label></div><div class="col-xs-12"><div class="task-date"><small><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;' + moment(opravek.finish_date).format("DD.MM.YYYY") + '</small></div></div>' + delete_task + '<ul class="task-tags">' + tags + '</ul></div>';
 
     return $(html);
 }

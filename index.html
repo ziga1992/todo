@@ -24,15 +24,54 @@
 	</header>
 		<div class="top-bar">
 			<ul class="new-bar">
-				<li class="new-button" data-toggle="modal" data-target="#addTodo"><i class="fa fa-plus" aria-hidden="true"></i></li>
+				<li class="new-button" id="addTodo"><i class="fa fa-plus" aria-hidden="true"></i></li>
 				<li class="new-button"><i class="fa fa-pencil" aria-hidden="true"></i></li>
 				<li class="new-button"></li>
 				<li class="new-button" id="remove"><i class="fa fa-trash-o" aria-hidden="true"></i></li>
 			</ul>
 		</div>
 	<nav>
-		<div class="slider"> 
-
+		<div class="slider-new"> 
+			<div class="menu new-task">Dodaj nov opravek:</div>
+			<div class="col-lg-12">
+				<div class="input-group input-ele">
+					<input type="text" class="form-control" id="todoTitle" placeholder="Opravek">
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="input-group input-ele">
+					<textarea type="text" class="form-control" id="todoDescription" rows="5" placeholder="Opis"></textarea>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="input-group input-ele date-datepicker">
+					<input type="text" class="form-control" id="todoDate" placeholder="Datum">
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="input-group input-ele">
+					<label>Prioriteta:</label>
+					<br />
+					<select class="choose" id="choose-prio">
+						<option value="-1">Brez</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="input-group input-ele">
+					<label>Tagi:</label>
+					<br />
+					<select class="choose" id="choose-tag">
+						<option value="-1">Brez</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="btn-group input-ele" style="position: absolute;left: 28px;" role="group">
+					<button type="button" class="btn btn-default btn-task-close" data-dismiss="modal">Zapri</button>
+					<button type="button" id="add" class="btn btn-primary">Dodaj</button>
+				</div>
+			</div>
 		</div>
 		<div class="menu-sliding">
 			<div class="main-menu">
@@ -92,102 +131,6 @@
 			<div class="row"></div>
 		</div>
 	</div>
-	<!-- test -->
-	<!-- MODALS -->
-	<div class="modal fade" id="addTodo" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Dodaj nov opravek</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="input-group">
-								<input type="text" class="form-control" id="todoTitle" placeholder="Opravek">
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="input-group">
-								<textarea type="text" class="form-control" id="todoDescription" rows="5" placeholder="Opis"></textarea>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="input-group date date-datepicker">
-								<input type="text" class="form-control" id="todoDate" placeholder="Datum"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-							</div>
-						</div>
-						<div class="col-lg-2">
-							<div class="input-group">
-								<label>Prioriteta:</label>
-								<br />
-								<select class="choose" id="choose-prio">
-									<option value="-1">Brez</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-2">
-							<div class="input-group">
-								<label>Tagi:</label>
-								<br />
-								<select class="choose" id="choose-tag">
-									<option value="-1">Brez</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
-					<button type="button" id="add" class="btn btn-primary">Dodaj</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	<!-- Priority -->
-	<div class="modal fade" id="priority" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Prioritete</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row" id="prio"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	<!-- Tags -->
-	<div class="modal fade" id="tags" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Oznake</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row" id="tag"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/moment.js"></script>

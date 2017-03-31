@@ -7,6 +7,8 @@
 }
 .clip {
 	animation: slide 2s;
+	transform: translateX(-100%);
+	animation-fill-mode: forwards; 
 }
 @keyframes slide {
   from {

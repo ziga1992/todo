@@ -11,13 +11,6 @@
 display: none;
 }
 
-#todoTitle,
-#todoDescription,
-.input-group {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
 #todoDescription {
     resize: vertical;
 }
@@ -121,15 +114,16 @@ nav {
     color: #2980b9;
 }
 
-.slider {
+.slider-new {
     width: 100%;
-    color: red;
+    background: #2980b9;
     height: 0px;
     transition: height 1s linear;
+    overflow: hidden;
 }
 
-.slider.open {
-    height: 700px;
+.slider-new.open {
+    height: 445px;
 }
 
 .main-menu {
@@ -352,4 +346,37 @@ input[type="checkbox"]:checked + label:after {
 
 .choose {
     color: black;
+}
+
+.delete-task {
+    position: absolute;
+    bottom: 5px;
+    left: 9px;
+    color: #c0392b;
+    font-size: 25px;
+    display: none;
+    cursor: pointer;
+}
+
+.trash-delete,
+.trash-delete:hover {
+    color: #c0392b;
+}
+
+.new-task {
+    background: #333333;
+    border-bottom: 2px solid white;
+    padding-left: 5px;
+}
+
+.new-task:hover {
+    background: #333333;
+    cursor: default;
+}
+.input-ele {
+    margin-top: 5px;
+}
+
+.input-ele label {
+    color: white;
 }
